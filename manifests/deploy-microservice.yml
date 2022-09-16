@@ -2,26 +2,26 @@ kind: Deployment
 apiVersion: apps/v1
 metadata:
     labels:
-        app: rajini-lab2-microservice
+        app: powerful-bee-microservice
         stack: frontend
         source: demo
-    name: rajini-lab2-microservice
+    name: powerful-bee-microservice
     namespace: microservices
 spec:
     replicas: 5
     selector:
         matchLabels:
-            run: rajini-lab2-microservice
+            run: powerful-bee-microservice
     template:
         metadata:
             labels:
-                app: rajini-lab2-microservice
-                run: rajini-lab2-microservice
+                app: powerful-bee-microservice
+                run: powerful-bee-microservice
                 source: demo
         spec:
             containers:
-                -   image: 219099013464.dkr.ecr.us-west-2.amazonaws.com/rajini-lab2-microservice
-                    name: rajini-lab2-microservice
+                -   image: 219099013464.dkr.ecr.us-west-2.amazonaws.com/powerful-bee-microservice
+                    name: powerful-bee-microservice
                     ports:
                         -   name: web
                             containerPort: 8080
@@ -31,14 +31,14 @@ kind: Service
 apiVersion: v1
 metadata:
     labels:
-        app: rajini-lab2-microservice-service
+        app: powerful-bee-microservice-service
         stack: frontend
-    name: rajini-lab2-microservice-service
+    name: powerful-bee-microservice-service
     namespace: microservices
 spec:
     selector:
         source: demo
-        app: rajini-lab2-microservice
+        app: powerful-bee-microservice
     ports:
         -   name: web
             protocol: TCP
@@ -54,15 +54,15 @@ metadata:
         stack: frontend
     annotations:
         nginx.ingress.kubernetes.io/rewrite-target: /$2
-    name: rajini-lab2-ingress
+    name: powerful-bee-ingress
     namespace: microservices
 spec:
     rules:
         -   http:
                 paths:
-                    -   path: /rajini-lab2(/|$)(.*)
+                    -   path: /powerful-bee(/|$)(.*)
                         backend:
-                            serviceName: rajini-lab2-microservice-service
+                            serviceName: powerful-bee-microservice-service
                             servicePort: 30201
 
 
